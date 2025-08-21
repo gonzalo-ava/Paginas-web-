@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebBoost Studio - Creación de Páginas Web</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Estilos generales */
+    :root {
+      --primary: #4361ee;
+      --secondary: #f72585;
+      --accent: #f9c74f;
+      --light: #f8f9fa;
+      --dark: #2d3748;
+      --success: #06d6a0;
+      --gray: #6c757d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    /* Header y navegación */
+    header {
+      background: linear-gradient(135deg, var(--primary), #3a0ca3);
+      color: white;
+      padding: 1rem 0;
+      position: relative;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo-img {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--primary);
+      border: 2px solid var(--accent);
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    
+    .logo-text span {
+      color: var(--accent);
+    }
+    
+    .contact-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+      transform: translateY(-2px) scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .whatsapp-btn .tooltip {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+    }
+    
+    .whatsapp-btn:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Sección de planes */
+    .plans-section {
+      padding: 4rem 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .card-header {
+      background: linear-gradient(135deg, var(--primary), #3a0ca3);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .card.professional .card-header {
+      background: linear-gradient(135deg, var(--secondary), #b5179e);
+    }
+    
+    .card-body {
+      padding: 2rem;
+    }
+    
+    .price {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 1rem 0;
+      text-align: center;
+    }
+    
+    .card.professional .price {
+      color: var(--secondary);
+    }
+    
+    .price-small {
+      font-size: 1rem;
+      font-weight: normal;
+      color: var(--gray);
+    }
+    
+    .features {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    
+    .features li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .features li i {
+      margin-right: 10px;
+      color: var(--success);
+    }
+    
+    .features li i.fa-times-circle {
+      color: #e63946;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    
+    .btn:hover {
+      background: #3a0ca3;
+      transform: translateY(-2px);
+    }
+    
+    .card.professional .btn {
+      background: var(--secondary);
+    }
+    
+    .card.professional .btn:hover {
+      background: #b5179e;
+    }
+    
+    /* Sección de características */
+    .features-section {
+      padding: 4rem 0;
+      background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    
+    .feature-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .feature-item:nth-child(2) .feature-icon {
+      color: var(--secondary);
+    }
+    
+    .feature-item:nth-child(3) .feature-icon {
+      color: var(--accent);
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #3a0ca3, var(--primary));
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.8rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .plans {
+        grid-template-columns: 1fr;
+      }
+      
+      .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 100;
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+    }
+    
+    /* Botón flotante de WhatsApp para móviles */
+    .whatsapp-float {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #25D366;
+        color: white;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        animation: pulse 2s infinite;
+      }
+      
+      .header-content .whatsapp-btn {
+        display: none;
+      }
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <div class="logo-img">
+            WB
+          </div>
+          <div class="logo-text">
+            <span>WebBoost</span> Studio
+          </div>
+        </div>
+        
+        <div class="contact-info">
+          <a href="https://wa.me/59171261231" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            <span class="tooltip">¡Contáctanos por WhatsApp!</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero">
+      <h1>Creación de Páginas Web Profesionales</h1>
+      <p>Impulsa tu negocio con una presencia online moderna, atractiva y efectiva</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="plans-section">
+      <div class="container">
+        <h2 class="section-title">Nuestros Planes</h2>
+        
+        <div class="plans">
+          <!-- Plan Básico / Gratuito -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Plan Gratuito</h3>
+            </div>
+            <div class="card-body">
+              <p>Ideal para emprendedores que comienzan su camino digital.</p>
+              <div class="price">
+                $0 <span class="price-small">/ mes</span>
+                <div style="font-size: 1rem; margin-top: 5px; color: var(--secondary); font-weight: bold;">
+                  (Solo desarrollo: 100 Bs)
+                </div>
+              </div>
+              <ul class="features">
+                <li><i class="fas fa-check-circle"></i> Hosting en <b>Vercel</b></li>
+                <li><i class="fas fa-check-circle"></i> Página simple y estática</li>
+                <li><i class="fas fa-check-circle"></i> Diseño responsive (móviles)</li>
+                <li><i class="fas fa-times-circle"></i> Sin dominio personalizado</li>
+                <li><i class="fas fa-times-circle"></i> Sin panel administrativo</li>
+              </ul>
+              <a href="https://wa.me/59171261231?text=Quiero%20el%20Plan%20Gratuito" class="btn">
+                Solicitar Ahora
+              </a>
+            </div>
+          </div>
+          
+          <!-- Plan Profesional -->
+          <div class="card professional">
+            <div class="card-header">
+              <h3>Plan Profesional</h3>
+            </div>
+            <div class="card-body">
+              <p>Perfecto para negocios que buscan destacar y crecer online.</p>
+              <div class="price">
+                $30 <span class="price-small">/ mes</span>
+              </div>
+              <ul class="features">
+                <li><i class="fas fa-check-circle"></i> Hosting en servidor premium</li>
+                <li><i class="fas fa-check-circle"></i> Dominio personalizado (.com/.net)</li>
+                <li><i class="fas fa-check-circle"></i> Diseño profesional y atractivo</li>
+                <li><i class="fas fa-check-circle"></i> Optimización SEO básica</li>
+                <li><i class="fas fa-check-circle"></i> Panel administrativo</li>
+                <li><i class="fas fa-check-circle"></i> Formulario de contacto</li>
+              </ul>
+              <a href="https://wa.me/59171261231?text=Me%20interesa%20el%20Plan%20Profesional" class="btn">
+                Contratar Ahora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title">¿Por qué elegirnos?</h2>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Rápido y Eficiente</h3>
+            <p>Entregamos tu sitio web en tiempo récord sin comprometer la calidad.</p>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Responsive Design</h3>
+            <p>Tu web se verá perfecta en cualquier dispositivo: móvil, tablet o desktop.</p>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>Soporte Continuo</h3>
+            <p>Te acompañamos durante y después del desarrollo de tu proyecto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">
+          <span>WebBoost</span> Studio
+        </div>
+        
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/59171261231"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p>© 2025 WebBoost Studio - Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp para móviles -->
+  <a href="https://wa.me/59171261231" class="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</body>
+</html>
